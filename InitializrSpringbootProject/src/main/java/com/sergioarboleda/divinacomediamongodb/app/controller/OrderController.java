@@ -81,7 +81,6 @@ public class OrderController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         String dateFormat = registerDay;
         Date date = formatter.parse(dateFormat);
-        System.out.println(date);
         return service.getOrderByRegisterDay(date, id);
     }
     
