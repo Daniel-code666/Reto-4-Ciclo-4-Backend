@@ -1,6 +1,8 @@
 function CoordPage(){
     return (
-        <h1>Página del coordinador</h1>
+        <div>
+            <h1>Página del coordinador</h1>
+        </div>
     );
 }
 

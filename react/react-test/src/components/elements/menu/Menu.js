@@ -7,15 +7,9 @@ import { useState } from 'react';
 
 function Menu(){
     const [modalShow, setModalShow] = useState(false);
-    const [idUser, setIdUser] = useState(0);
 
-
-    const setSession = () => {
-        if(localStorage.getItem('idUser')!=null){
-            setIdUser(localStorage.getItem('idUser'));
-            console.log(idUser);
-        }
-    }
+    const idUser = localStorage.getItem('idUser');
+    const type = localStorage.getItem('type');
 
     return(
         <>
@@ -26,13 +20,15 @@ function Menu(){
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             <Link className='nav-link' to="/">Home</Link>
-                            {idUser===0 ? <Nav.Link id="login" onClick={() => setModalShow(true)}>Login</Nav.Link> : null }
-                            {idUser!==0 ? <Link className='nav-link' to="/orders">Orders</Link> : null }
+                            {idUser === null ? <Nav.Link id="login" onClick={() => setModalShow(true)}>Login</Nav.Link> : null }
+                            {idUser !== null & type === 'ASE'? <Link className='nav-link' to="/orders">Generar ordenes</Link> : null }
+                            {idUser !== null & type === 'ADM'? <Link className='nav-link' to="/adminpage">Administrar Usuarios</Link> : null }
+                            {idUser !== null & type === 'COORD'? <Link className='nav-link' to="/coordpage">Validar ordenes</Link> : null }
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <LoginModal show={modalShow} onHide={() => setModalShow(false)} onSession={() => setSession()} />
+            <LoginModal show={modalShow} onHide={() => setModalShow(false)}  />
         </>
     );
 }

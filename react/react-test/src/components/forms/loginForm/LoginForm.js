@@ -24,6 +24,7 @@ class LoginForm extends React.Component{
             .then(data => {
                 if(data.id !== null) {
                     localStorage.setItem('idUser', data.id);
+                    localStorage.setItem('type', data.type);
                     this.props.onHide();
                     this.props.onSession();
                 }else{
@@ -41,7 +42,6 @@ class LoginForm extends React.Component{
             [name]: value
         });
     }
-
 
     render() {
         return (

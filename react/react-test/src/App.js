@@ -8,6 +8,8 @@ import Menu from './components/elements/menu/Menu';
 
 import { Container } from 'react-bootstrap';
 import { Routes, Route} from "react-router-dom";
+import CoordPage from './pages/CoordPage';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/" element={<Home />} />
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/orders" element={<Orders />} />
+        <Route path="/coordpage" element={<CoordPage />} />
+        <Route path="/adminpage" element={<AdminPage/>} />
       </Routes>
     </Container>
   );
