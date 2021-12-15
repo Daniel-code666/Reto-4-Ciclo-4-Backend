@@ -1,8 +1,10 @@
+import '../App.css';
+
 function Home(){
     return (
-        <div>
+        <div className='centrar'>
             <h1>Home</h1>
-            <p>This is the home page</p>
+            <p><h5>Página de inicio de la aplicación administrativa de la Divina Comedia</h5></p>
         </div>
     );
 }

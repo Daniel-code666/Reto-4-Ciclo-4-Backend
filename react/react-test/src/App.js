@@ -1,8 +1,7 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
-import Login from './pages/Login';
 import Orders from './pages/Orders';
 import Menu from './components/elements/menu/Menu';
 

@@ -13,6 +13,10 @@
   }
 }
 
+.centrar{
+  text-align: center;
+}
+
 .contenedor{
   padding: 0 !important;
 }

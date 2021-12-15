@@ -5,3 +5,16 @@
 .espacio{
     margin-right: 15%;
 }
+
+.column {
+    flex: 30%;
+    padding: 0px;
+}
+
+.espacioCol {
+    margin-left: -10%;
+}
+
+.row {
+    display: flex;
+}

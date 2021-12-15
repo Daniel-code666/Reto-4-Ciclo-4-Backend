@@ -4,12 +4,16 @@ import { Link } from "react-router-dom";
 import LoginModal from '../../modals/loginModal/LoginModal';
 import { useState } from 'react';
 
+function logout(){
+    localStorage.clear();
+}
 
 function Menu(){
     const [modalShow, setModalShow] = useState(false);
 
     const idUser = localStorage.getItem('idUser');
     const type = localStorage.getItem('type');
+
 
     return(
         <>
@@ -22,8 +26,9 @@ function Menu(){
                             <Link className='nav-link' to="/">Home</Link>
                             {idUser === null ? <Nav.Link id="login" onClick={() => setModalShow(true)}>Login</Nav.Link> : null }
                             {idUser !== null & type === 'ASE'? <Link className='nav-link' to="/orders">Generar ordenes</Link> : null }
-                            {idUser !== null & type === 'ADM'? <Link className='nav-link' to="/adminpage">Administrar Usuarios</Link> : null }
+                            {idUser !== null & type === 'ADM'? <Link className='nav-link' to="/adminpage">Administrar negocio</Link> : null }
                             {idUser !== null & type === 'COORD'? <Link className='nav-link' to="/coordpage">Validar ordenes</Link> : null }
+                            {idUser !== null ? <Nav.Link className='alinear' href="/" onClick={()=>logout()}>Cerrar sesión</Nav.Link> : null }
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
