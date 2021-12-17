@@ -1,8 +1,8 @@
+import OrdersAprob from "../components/elements/orders/OrdersAprob";
+
 function CoordPage(){
     return (
-        <div>
-            <h1>Página del coordinador</h1>
-        </div>
+        <OrdersAprob />
     );
 }
 

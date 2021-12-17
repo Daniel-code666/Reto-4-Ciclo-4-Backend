@@ -4,7 +4,9 @@ function Home(){
     return (
         <div className='centrar'>
             <h1>Home</h1>
-            <p><h5>Página de inicio de la aplicación administrativa de la Divina Comedia</h5></p>
+            <h5>
+                <p>Página de inicio de la aplicación administrativa de la Divina Comedia</p>
+            </h5> 
         </div>
     );
 }

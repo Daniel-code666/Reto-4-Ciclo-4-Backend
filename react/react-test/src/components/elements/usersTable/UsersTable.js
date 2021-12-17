@@ -45,29 +45,29 @@ class UsersTable extends React.Component{
     // peticiones para recuperar el prefil a través del id logeado, la lista de los usuarios registrados y
     // la lista de productos en la BD, se llama cuando se abre el componente o se recarga la página
     componentDidMount(){
-        fetch("http://localhost:8080/api/user/all")
+        fetch("http://129.151.116.250:8080/api/user/all")
         .then(resp => resp.json())
         .then(resp => this.setState({users:resp}));
         
-        fetch("http://localhost:8080/api/user/" + localStorage.getItem('idUser'))
+        fetch("http://129.151.116.250:8080/api/user/" + localStorage.getItem('idUser'))
         .then(response => response.json())
         .then(response => this.setState({user:response}));
 
-        fetch("http://localhost:8080/api/hairproducts/all")
+        fetch("http://129.151.116.250:8080/api/hairproducts/all")
         .then(resp => resp.json())
         .then(resp => this.setState({products: resp}));
     }
 
     // petición para recuperar solo la lista de usuarios registrados
     getUsers(){
-        fetch("http://localhost:8080/api/user/all")
+        fetch("http://129.151.116.250:8080/api/user/all")
         .then(resp => resp.json())
         .then(resp => this.setState({users:resp}));
     }
 
     // petición que recupera solo la lista de productos en la BD
     getProducts(){
-        fetch("http://localhost:8080/api/hairproducts/all")
+        fetch("http://129.151.116.250:8080/api/hairproducts/all")
         .then(resp => resp.json())
         .then(resp => this.setState({products: resp}));
     }
@@ -152,7 +152,7 @@ class UsersTable extends React.Component{
             || this.state.form.id === ''){
                 alert('Debe ingresar todos los campos')
             }else{
-                fetch('http://localhost:8080/api/user/new', {
+                fetch('http://129.151.116.250:8080/api/user/new', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -193,7 +193,7 @@ class UsersTable extends React.Component{
             || this.state.form.id === ''){
                 alert('Debe ingresar todos los campos')
             }else{
-                fetch('http://localhost:8080/api/user/new', {
+                fetch('http://129.151.116.250:8080/api/user/new', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -234,7 +234,7 @@ class UsersTable extends React.Component{
                 alert('Debe ingresar todos los campos')
             }else{
                 console.log(user);
-                fetch('http://localhost:8080/api/user/update', {
+                fetch('http://129.151.116.250:8080/api/user/update', {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -267,7 +267,7 @@ class UsersTable extends React.Component{
 
     // función para eliminar un usuario
     deleteUser=(id)=>{
-        fetch('http://localhost:8080/api/user/' + id, {
+        fetch('http://129.151.116.250:8080/api/user/' + id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -291,7 +291,7 @@ class UsersTable extends React.Component{
         if(this.state.formProd.reference === ''){
                 alert('Debe ingresar todos los campos')
             }else{
-                fetch('http://localhost:8080/api/hairproducts/new', {
+                fetch('http://129.151.116.250:8080/api/hairproducts/new', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -329,7 +329,7 @@ class UsersTable extends React.Component{
         if(this.state.formProd.reference === ''){
                 alert('Debe ingresar todos los campos')
             }else{
-                fetch('http://localhost:8080/api/hairproducts/update', {
+                fetch('http://129.151.116.250:8080/api/hairproducts/update', {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -360,7 +360,7 @@ class UsersTable extends React.Component{
 
     // función para eliminar un producto
     deleteProd=(reference)=>{
-        fetch("http://localhost:8080/api/hairproducts/" + reference, {
+        fetch("http://129.151.116.250:8080/api/hairproducts/" + reference, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

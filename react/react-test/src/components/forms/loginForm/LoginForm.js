@@ -19,7 +19,7 @@ class LoginForm extends React.Component{
         if(this.state.email === '' || this.state.password === '') {
             alert('Por favor, rellene todos los campos');
         }else{
-            fetch('http://localhost:8080/api/user/'+this.state.email+'/'+this.state.password)
+            fetch('http://129.151.116.250:8080/api/user/'+this.state.email+'/'+this.state.password)
             .then(res => res.json())
             .then(data => {
                 if(data.id !== null) {

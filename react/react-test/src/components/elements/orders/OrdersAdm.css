@@ -1,0 +1,32 @@
+.esp{
+    margin-right: 3%;
+}
+
+.espLabel{
+    margin-right: 1%;
+}
+
+.column {
+    flex: 1%;
+    padding: 0px;
+}
+
+.inputSizeDate{
+    width: 29%;
+}
+
+.inputSizeId{
+    width: 13%;
+}
+
+.desplazarDiv{
+    margin-left: 5%;
+}
+
+.espacioCol {
+    margin-left: -10%;
+}
+
+.row {
+    display: flex;
+}
