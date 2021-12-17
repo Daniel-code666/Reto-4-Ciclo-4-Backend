@@ -52,21 +52,21 @@ class OrdersAdm extends React.Component{
     }
 
     componentDidMount(){
-        fetch("http://129.151.116.250:8080/api/user/" + localStorage.getItem('idUser'))
+        fetch("http://localhost:8080/api/user/" + localStorage.getItem('idUser'))
         .then(response => response.json())
         .then(response => this.setState({user:response}));
 
-        fetch("http://129.151.116.250:8080/api/hairproducts/all")
+        fetch("http://localhost:8080/api/hairproducts/all")
         .then(resp => resp.json())
         .then(resp => this.setState({products: resp}));
 
-        fetch("http://129.151.116.250:8080/api/order/all")
+        fetch("http://localhost:8080/api/order/all")
         .then(data => data.json())
         .then(data => this.setState({orders: data}));
     }
 
     getOrders(){
-        fetch("http://129.151.116.250:8080/api/order/all")
+        fetch("http://localhost:8080/api/order/all")
         .then(data => data.json())
         .then(data => this.setState({orders: data}));
     }
@@ -157,7 +157,7 @@ class OrdersAdm extends React.Component{
 
             console.log(order);
 
-            fetch('http://129.151.116.250:8080/api/order/new', {
+            fetch('http://localhost:8080/api/order/new', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -184,7 +184,7 @@ class OrdersAdm extends React.Component{
     }
 
     deleteOrder=(id)=>{
-        fetch('http://129.151.116.250:8080/api/order/' + id, {
+        fetch('http://localhost:8080/api/order/' + id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -201,7 +201,7 @@ class OrdersAdm extends React.Component{
 
     getOrdersByDate=()=>{
         console.log(this.state.formOrdDate);
-        fetch("http://129.151.116.250:8080/api/order/date/" + this.state.formOrdDate.date 
+        fetch("http://localhost:8080/api/order/date/" + this.state.formOrdDate.date 
                 + "/" + Number(this.state.formOrdDate.id))
         .then(data => data.json())
         .then(data => this.setState({orders: data}));
@@ -209,7 +209,7 @@ class OrdersAdm extends React.Component{
 
     getOrdersByState=()=>{
         console.log(this.state.formOrdState);
-        fetch("http://129.151.116.250:8080/api/order/state/" + this.state.formOrdState.estado 
+        fetch("http://localhost:8080/api/order/state/" + this.state.formOrdState.estado 
                 + "/" + Number(this.state.formOrdState.id))
         .then(data => data.json())
         .then(data => this.setState({orders: data}));

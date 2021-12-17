@@ -14,17 +14,17 @@ class OrdersAprob extends React.Component{
     }
 
     componentDidMount(){
-        fetch("http://129.151.116.250:8080/api/user/" + localStorage.getItem('idUser'))
+        fetch("http://localhost:8080/api/user/" + localStorage.getItem('idUser'))
         .then(response => response.json())
         .then(response => this.setState({user:response}));
 
-        fetch("http://129.151.116.250:8080/api/order/all")
+        fetch("http://localhost:8080/api/order/all")
         .then(data => data.json())
         .then(data => this.setState({orders: data}));
     }
 
     getOrders(){
-        fetch("http://129.151.116.250:8080/api/order/all")
+        fetch("http://localhost:8080/api/order/all")
         .then(data => data.json())
         .then(data => this.setState({orders: data}));
     }
@@ -39,7 +39,7 @@ class OrdersAprob extends React.Component{
             quantities: {[Object.keys(order.quantities)]: [Object.values(order.quantities)]}
         }
 
-        fetch("http://129.151.116.250:8080/api/order/update", {
+        fetch("http://localhost:8080/api/order/update", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ class OrdersAprob extends React.Component{
             quantities: {[Object.keys(order.quantities)]: [Object.values(order.quantities)]}
         }
 
-        fetch("http://129.151.116.250:8080/api/order/update", {
+        fetch("http://localhost:8080/api/order/update", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -105,7 +105,7 @@ class OrdersAprob extends React.Component{
             quantities: {[Object.keys(order.quantities)]: [Object.values(order.quantities)]}
         }
 
-        fetch("http://129.151.116.250:8080/api/order/update", {
+        fetch("http://localhost:8080/api/order/update", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

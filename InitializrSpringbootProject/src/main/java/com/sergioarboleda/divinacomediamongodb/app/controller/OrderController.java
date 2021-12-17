@@ -78,10 +78,8 @@ public class OrderController {
     
     @GetMapping("/date/{date}/{id}")
     public List<Order> getOrderByRegisterDay(@PathVariable("date") String registerDay, @PathVariable("id") Integer id) throws ParseException{
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        String dateFormat = registerDay;
-        Date date = formatter.parse(dateFormat);
-        return service.getOrderByRegisterDay(date, id);
+        
+        return service.getOrderByRegisterDay(registerDay, id);
     }
     
     @GetMapping("/state/{state}/{id}")

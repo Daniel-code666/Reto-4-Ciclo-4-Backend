@@ -59,8 +59,9 @@ public class OrderRepository {
         return repository.findBySalesManId(id);
     }
     
-    public List<Order> getOrderByRegisterDay(Date registerDay, Integer id){
-        return repository.findByRegisterDayAndSalesMan_Id(registerDay, id);
+    public List<Order> getOrderByRegisterDay(Date registerDay_1, Date registerDay_2,Integer id){
+        // return repository.findByRegisterDayAndSalesMan_Id(registerDay, id);
+        return repository.findByRegisterDayBetweenAndSalesMan_Id(registerDay_1, registerDay_2, id);
     }
     
     public List<Order> getOrderByStatusAndId(String status, Integer id){

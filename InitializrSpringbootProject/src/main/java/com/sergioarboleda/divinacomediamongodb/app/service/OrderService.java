@@ -7,9 +7,15 @@ package com.sergioarboleda.divinacomediamongodb.app.service;
 
 import com.sergioarboleda.divinacomediamongodb.app.model.Order;
 import com.sergioarboleda.divinacomediamongodb.app.repositories.OrderRepository;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,8 +91,16 @@ public class OrderService {
         return repository.getOrderByAseID(id);
     }
     
-    public List<Order> getOrderByRegisterDay(Date registerDay, Integer id){
-        return repository.getOrderByRegisterDay(registerDay, id);
+    public List<Order> getOrderByRegisterDay(String registerDay, Integer id) throws ParseException{
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        String dateFormat = registerDay;
+        Date date = formatter.parse(dateFormat);
+        
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate fechaActual = LocalDate.parse(registerDay, f);
+        Date fecha1 = Date.from(fechaActual.plusDays(1).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        Date fecha2 = Date.from(fechaActual.minusDays(1).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        return repository.getOrderByRegisterDay(fecha2, fecha1, id);
     }
     
     public List<Order> getOrderByStatus(String status, Integer id){
