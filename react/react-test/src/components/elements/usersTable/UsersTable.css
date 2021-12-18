@@ -6,6 +6,30 @@
     margin-right: 15%;
 }
 
+.esp{
+    margin-right: 1%;
+}
+
+.espLabel{
+    margin-right: 1%;
+}
+
+.selSize{
+    width: 10%;
+}
+
+.inputSizeDate{
+    width: 10%;
+}
+
+.inputSizeId{
+    width: 13%;
+}
+
+.desplazarDiv{
+    margin-left: 5%;
+}
+
 .column {
     flex: 30%;
     padding: 0px;

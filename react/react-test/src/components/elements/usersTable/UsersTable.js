@@ -34,6 +34,9 @@ class UsersTable extends React.Component{
                 quantity: null,
                 photography: ''
             },
+            formUserBirthDay: {
+                monthBirthDay: ''
+            },
             modalInsert: false,
             modalInsertCoord: false,
             modalInsertProd: false,
@@ -87,6 +90,15 @@ class UsersTable extends React.Component{
         this.setState({
             formProd:{
                 ...this.state.formProd,
+                [e.target.name]:e.target.value,
+            }
+        })
+    }
+
+    handleChangeUserBirthDay = e =>{
+        this.setState({
+            formUserBirthDay:{
+                ...this.state.formUserBirthDay,
                 [e.target.name]:e.target.value,
             }
         })
@@ -152,7 +164,7 @@ class UsersTable extends React.Component{
             || this.state.form.id === ''){
                 alert('Debe ingresar todos los campos')
             }else{
-                fetch('http://localhost:8080/api/user/new', {
+                fetch('http://129.151.116.250:8080/api/user/new', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -375,6 +387,20 @@ class UsersTable extends React.Component{
         });
     }
 
+    getUserByMonthBirthDay=()=>{
+        console.log(this.state.formUserBirthDay.monthBirthDay)
+        const fixedMonth = '01';
+        if (this.state.formUserBirthDay.monthBirthDay === ""){
+            fetch("http://localhost:8080/api/user/birthday/" + fixedMonth)
+            .then(resp => resp.json())
+            .then(resp => this.setState({users:resp}));
+        }else{
+            fetch("http://localhost:8080/api/user/birthday/" + this.state.formUserBirthDay.monthBirthDay)
+            .then(resp => resp.json())
+            .then(resp => this.setState({users:resp}));
+        }
+    }
+
     render() {
         return (
             <>
@@ -413,41 +439,71 @@ class UsersTable extends React.Component{
                     <h1>Lista de usuarios</h1>
                 </div>
                 <br></br>
+                <div className='row'>
+                    <div className='text-center'>
+                        <h5>Filtrar por mes de cumpleaños</h5>
+                        <FormGroup>
+                            <label className='espLabel'>Mes de cumpleaños</label>
+                            <select name='monthBirthDay' className='esp selSize' onChange={this.handleChangeUserBirthDay}>
+                                <option value="01" defaultValue="01">Enero</option>
+                                <option value="02">Febrero</option>
+                                <option value="03">Marzo</option>
+                                <option value="04">Abril</option>
+                                <option value="05">Mayo</option>
+                                <option value="06">Junio</option>
+                                <option value="07">Julio</option>
+                                <option value="08">Agosto</option>
+                                <option value="09">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                            <Button color='primary' size='sm' onClick={()=>this.getUserByMonthBirthDay()}>
+                                Filtrar
+                            </Button>
+                        </FormGroup>
+                    </div>
+                </div>
                 <div>
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th>Identificación</th>
-                                <th>Nombres</th>
-                                <th>Email</th>
-                                <th>Perfil</th>
-                                <th>Zona</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.users.map((element) => (
-                                <tr key={element.id}>
-                                    <td>{element.identification}</td>
-                                    <td>{element.name}</td>
-                                    <td>{element.email}</td>
-                                    <td>{element.type}</td>
-                                    <td>{element.zone}</td>
-                                    <td>
-                                        <Button 
-                                            color="warning" size="sm" className='espacio' 
-                                            onClick={()=>this.showModalEditarUser(element)}>
-                                                Editar
-                                        </Button>
-                                        <Button color="danger" size="sm" 
-                                        onClick={()=>this.deleteUser(element.id)}>
-                                            Borrar
-                                        </Button>
-                                    </td>
+                    {
+                        this.state.users.length > 0 ? 
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th>Identificación</th>
+                                    <th>Nombres</th>
+                                    <th>Email</th>
+                                    <th>Mes de cumpleaños</th>
+                                    <th>Perfil</th>
+                                    <th>Zona</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </Table>
+                            </thead>
+                            <tbody>
+                                {this.state.users.map((element) => (
+                                    <tr key={element.id}>
+                                        <td>{element.identification}</td>
+                                        <td>{element.name}</td>
+                                        <td>{element.email}</td>
+                                        <td>{element.monthBirthtDay}</td>
+                                        <td>{element.type}</td>
+                                        <td>{element.zone}</td>
+                                        <td>
+                                            <Button 
+                                                color="warning" size="sm" className='espacio' 
+                                                onClick={()=>this.showModalEditarUser(element)}>
+                                                    Editar
+                                            </Button>
+                                            <Button color="danger" size="sm" 
+                                            onClick={()=>this.deleteUser(element.id)}>
+                                                Borrar
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table> : <h5 className='text-center'>No hay ningún registro</h5>
+                    }
                 </div>
 
                 <div className='row'>

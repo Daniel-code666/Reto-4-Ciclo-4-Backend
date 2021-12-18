@@ -1,0 +1,31 @@
+.alinear{
+    text-align: center;
+}
+
+.espacio{
+    margin-right: 15%;
+}
+
+.esp{
+    margin-right: 1%;
+}
+
+.espLabel{
+    margin-right: 1%;
+}
+
+.selSize{
+    width: 10%;
+}
+
+.inputSizeDesc{
+    width: 20%;
+}
+
+.inputSizePrice{
+    width: 15%;
+}
+
+.justificar{
+    text-justify: distribute;
+}

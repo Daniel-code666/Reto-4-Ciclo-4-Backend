@@ -45,6 +45,12 @@ class OrdersAdm extends React.Component{
                 products: {},
                 quantities: {}
             },
+            formProdPrice:{
+                price: null
+            },
+            formProdDesc:{
+                description: ''
+            },
             salesMan: [],
             modalOrder: false,
             modalDetailOrder: false
@@ -107,6 +113,24 @@ class OrdersAdm extends React.Component{
         });
     }
 
+    handleChangeGetProdByPrice = e =>{
+        this.setState({
+            formProdPrice:{
+                ...this.state.formProdPrice,
+                [e.target.name]:e.target.value,
+            }
+        });
+    }
+
+    handleChangeGetProdByDesc = e =>{
+        this.setState({
+            formProdDesc:{
+                ...this.state.formProdDesc,
+                [e.target.name]:e.target.value,
+            }
+        });
+    }
+
     // abre el modal de agregar order
     showModalOrder=(registro)=>{
         this.setState({modalOrder: true, formOrd: registro});
@@ -157,7 +181,7 @@ class OrdersAdm extends React.Component{
 
             console.log(order);
 
-            fetch('http://localhost:8080/api/order/new', {
+            fetch('http://129.151.116.250:8080/api/order/new', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -215,6 +239,20 @@ class OrdersAdm extends React.Component{
         .then(data => this.setState({orders: data}));
     }
 
+    getProdByPrice=()=>{
+        console.log(this.state.formProdPrice);
+        fetch("http://localhost:8080/api/hairproducts/price/" + Number(this.state.formProdPrice.price))
+        .then(data => data.json())
+        .then(data => this.setState({products: data}));
+    }
+
+    getProdByDesc=()=>{
+        console.log(this.state.formProdDesc);
+        fetch("http://localhost:8080/api/hairproducts/description/" + this.state.formProdDesc.description)
+        .then(data => data.json())
+        .then(data => this.setState({products: data}));
+    }
+
     render(){
         return(
             <>
@@ -253,8 +291,38 @@ class OrdersAdm extends React.Component{
                     <h1>Lista de productos</h1>
                 </div>
                 <br></br>
+                <div className='row'>
+                    <div className='col-lg-5'>
+                        <div className='text-center'>
+                            <h5>Filtrar por descripción</h5>
+                            <FormGroup>
+                                <label className='espLabel'>Palabra clave</label>
+                                <input name='description' className='inputSizeDate esp' type="text" 
+                                onChange={this.handleChangeGetProdByDesc}/>
+                                <Button color='primary' size='sm' onClick={()=>this.getProdByDesc()}>
+                                    Filtrar
+                                </Button>
+                            </FormGroup>
+                        </div>
+                    </div>
+                    <div className='col-lg-7'>
+                        <div className='text-center desplazarDiv'>
+                            <h5>Filtrar por precio</h5>
+                            <FormGroup>
+                                <label className='espLabel'>Precio</label>
+                                <input name='price' className='inputSizeId esp' type='number' 
+                                onChange={this.handleChangeGetProdByPrice}/>
+                                <Button color='primary' size='sm' onClick={()=>this.getProdByPrice()}>
+                                    Filtrar
+                                </Button>
+                            </FormGroup>
+                        </div>
+                    </div>
+                </div>
                 <div>
-                    <Table>
+                    {
+                        this.state.products.length > 0 ? 
+                        <Table>
                         <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -287,8 +355,9 @@ class OrdersAdm extends React.Component{
                                     </td>
                                 </tr>
                             ))}
-                        </tbody>
-                    </Table>
+                            </tbody>
+                        </Table> : <h5 className='text-center'>No hay ningún registro</h5>
+                    }
                 </div>
             </Container>
 
